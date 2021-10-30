@@ -13,21 +13,6 @@ now = datetime.datetime.now()
 global save_date
 
 
-# add a class to store different dates
-class Date:
-    def __init__(self, name, year, month, day):
-        self.name = name
-        self.year = year
-        self.month = month
-        self.day = day
-
-    # add a method to store different dates
-    def save_date(self):
-        date_dict = self.name, self.year, self.month, self.day
-        with open('save_date.json', 'w') as f:
-            json.dump(date_dict, f, indent=4)
-
-
 def day_passed_gui():
     window = Tk()
     window.title("Days passed")
@@ -90,7 +75,8 @@ def day_passed_cli():
 def gui_or_cli():
     print(blue(bold("Do you want to use the GUI? y/n?: ")))
     user_input = input()
-    if user_input == "y":        day_passed_gui()
+    if user_input == "y":
+        day_passed_gui()
     elif user_input == "n":
         day_passed_cli()
     else:
