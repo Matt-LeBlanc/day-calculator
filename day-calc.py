@@ -45,7 +45,7 @@ def day_passed_submit_gui(entry):
     messagebox.showinfo("Months passed", "Months passed: " + str(months_passed))
     years_passed = day_input.days / 365
     messagebox.showinfo("Years passed", "Years passed: " + str(years_passed))
-    exit(0)
+    exit()
 
 
 def day_passed_cli():
@@ -66,9 +66,9 @@ def day_passed_cli():
     if user_input == "y":
         day_passed_cli()
     elif user_input == "n":
-        exit(0)
+        exit()
     else:
-        exit(0)
+        exit()
 
 
 def gui_or_cli():
@@ -79,7 +79,7 @@ def gui_or_cli():
     elif user_input == "n":
         day_passed_cli()
     else:
-        exit(0)
+        exit()
 
 
 gui_or_cli()
