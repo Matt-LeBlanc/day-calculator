@@ -3,8 +3,6 @@
 import os
 import datetime
 from curtsies.fmtfuncs import green, bold, blue, cyan
-from tkinter import *
-from tkinter import messagebox
 import json
 
 days_passed = 0
@@ -18,8 +16,8 @@ class Date:
         self.year = year
         self.month = month
         self.day = day
-
-    # add a method to store different dates
+        
+    
     def save_date(self):
         date_dict = self.name, self.year, self.month, self.day
         with open('save_date.json', 'w') as f:
