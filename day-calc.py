@@ -2,60 +2,13 @@
 
 import os
 import datetime
-from curtsies.fmtfuncs import green, bold, blue, cyan
-from tkinter import *
-from tkinter import messagebox
+from curtsies.fmtfuncs import green, bold, cyan
 import json
 
 days_passed = 0
 os.system("clear")
 now = datetime.datetime.now()
 global save_date
-
-
-def day_passed_gui():
-    window = Tk()
-    window.title("Days passed")
-    window.geometry("550x100")
-    window.configure(background="gray")
-    label = Label(window, text="Enter date in format MM-DD-YYYY: ", bg="gray")
-    label.config(font=("Arial", 10))
-    label.grid(column=0, row=0)
-    entry = Entry(window, width=30)
-    entry.config(font=("Arial", 10))
-    entry.grid(column=1, row=0)
-    button = Button(window, text="Submit", command=lambda: day_passed_submit_gui(entry))
-    button.config(font=("Arial", 10))
-    button.grid(column=1, row=1)
-    label2 = Label(window, text="Current date and time : ", bg="gray")
-    label2.config(font=("Arial", 10))
-    label2.grid(column=0, row=3)
-    label3 = Label(window, text=now.strftime("%m-%d-%Y"), bg="gray")
-    label3.config(font=("Arial", 10))
-    label3.grid(column=1, row=3)
-    entry.focus()
-    window.bind('<Return>', lambda event: day_passed_submit_gui(entry))
-    window.mainloop()
-
-
-def day_passed_submit_gui(entry):
-    global save_date
-    user_input = entry.get()
-    user_input = datetime.datetime.strptime(user_input, "%m-%d-%Y")
-    save_date = user_input
-    save_date_list = save_date.strftime("%m-%d-%Y")
-    print(save_date_list)
-    with open("save_date.json", "w") as f:
-        json.dump(save_date_list, f)
-    day_input = now - user_input
-    messagebox.showinfo("Days passed", "Days passed: " + str(day_input.days))
-    weeks_passed = day_input.days / 7
-    messagebox.showinfo("Weeks passed", "Weeks passed: " + str(weeks_passed))
-    months_passed = day_input.days / 30
-    messagebox.showinfo("Months passed", "Months passed: " + str(months_passed))
-    years_passed = day_input.days / 365
-    messagebox.showinfo("Years passed", "Years passed: " + str(years_passed))
-    exit()
 
 
 def day_passed_cli():
@@ -72,15 +25,6 @@ def day_passed_cli():
     calculate_days(user_input)
 
 
-def gui_or_cli():
-    print(blue(bold("Do you want to use the GUI? y/n?: ")))
-    user_input = input()
-    if user_input == "y":
-        day_passed_gui()
-    elif user_input == "n":
-        day_passed_cli()
-    else:
-        exit()
 
 
 def calculate_days(date):
@@ -110,11 +54,11 @@ def main():
             print(green(bold("Do you want to save another date? y/N?: ")))
             user_input = input()
             if user_input == "y":
-                gui_or_cli()
+                day_passed_cli()
             elif user_input == "n":
                 exit()
     else:
-        gui_or_cli()
+        day_passed_cli()
 
 
 main()
