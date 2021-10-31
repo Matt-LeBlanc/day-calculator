@@ -11,7 +11,7 @@ now = datetime.datetime.now()
 global save_date
 
 
-def day_passed_cli():
+def day_passed():
     global save_date
     print(green(bold("Welcome to the date calculator!")))
     print(cyan(bold("Please enter a date in the format MM-DD-YYYY")))
@@ -54,11 +54,11 @@ def main():
             print(green(bold("Do you want to save another date? y/N?: ")))
             user_input = input()
             if user_input == "y":
-                day_passed_cli()
+                day_passed()
             elif user_input == "n":
                 exit()
     else:
-        day_passed_cli()
+        day_passed()
 
 
 main()
