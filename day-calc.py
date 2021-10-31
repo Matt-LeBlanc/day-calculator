@@ -8,11 +8,12 @@ import json
 days_passed = 0
 os.system("clear")
 now = datetime.datetime.now()
-global save_date
+global save_date, save_date_dir
+save_date_dir = f"/home/" + os.getlogin() + "/"
 
 
 def day_passed():
-    global save_date
+    global save_date, save_date_dir
     print(green(bold("Welcome to the date calculator!")))
     print(cyan(bold("Please enter a date in the format MM-DD-YYYY")))
     user_input = input()
@@ -20,14 +21,13 @@ def day_passed():
     save_date = user_input
     save_date_list = save_date.strftime("%m-%d-%Y")
     print(save_date_list)
-    with open("save_date.json", "w") as f:
+    with open(f"{save_date_dir}day_calculator.json", "w") as f:
         json.dump(save_date_list, f)
     calculate_days(user_input)
 
 
-
-
 def calculate_days(date):
+    global save_date, save_date_dir
     date_then = date
     date_now = datetime.datetime.now()
     date_diff = date_now - date_then
@@ -45,9 +45,9 @@ def calculate_days(date):
 
 
 def main():
-    global save_date
-    if os.path.isfile("save_date.json"):
-        with open("save_date.json", "r") as f:
+    global save_date, save_date_dir
+    if os.path.isfile(f"{save_date_dir}day_calculator.json"):
+        with open(f"{save_date_dir}day_calculator.json", "r") as f:
             save_date = json.load(f)
             save_date = datetime.datetime.strptime(save_date, "%m-%d-%Y")
             calculate_days(save_date)
@@ -61,4 +61,5 @@ def main():
         day_passed()
 
 
-main()
+if __name__ == "__main__":
+    main()
